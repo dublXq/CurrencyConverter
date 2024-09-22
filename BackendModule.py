@@ -6,34 +6,58 @@ class BackendModule:
         self.second_choice = None
 
     def currency_choice_first(self):
-
-        print("Выберите валюту из какой хотите конвертировать\n"
-              "1. Доллары\n"
-              "2. Евро\n"
-              "3. Гривны\n"
-              "4. Рубли\n")
-        self.first_choice = input("Ввод: ")
-        if self.first_choice != "1" or "2" or "3" or "4":
-            print("Нужно ввести в диапазоне 1 - 4. Выберите пожалуйста, в этом пределе.")
-        else:
-            print(f"Чудесно, вы выбрали -> {self.first_choice}, Введите теперь пожалуйста сумму")
-            self.first_choice_money = input("Ввод: ")
-            return self.first_choice, int(self.first_choice_money)
+        """Метод для определения ИЗ какой валюты необходимо произвести конвертацию.
+        Доступно 4 варианта.
+        1. Доллары
+        2. Евро
+        3. Гривны
+        4. Рубли
+        Так же записывается в self.first_choice_money - первая сумма конвертации"""
+        while True:
+            print("Выберите валюту из какой хотите конвертировать\n"
+                  "1. Доллары\n"
+                  "2. Евро\n"
+                  "3. Гривны\n"
+                  "4. Рубли\n")
+            self.first_choice = input("Ввод: ")
+            if self.first_choice not in ["1", "2", "3", "4"]:
+                print("Нужно ввести в диапазоне 1 - 4. Выберите пожалуйста, в этом пределе.")
+            else:
+                print(f"Чудесно, вы выбрали -> {self.first_choice}, Введите теперь пожалуйста сумму")
+                self.first_choice_money = input("Ввод: ")
+                if not self.first_choice_money.isdigit():
+                    print("Повторите попытку. Вы ввели не число")
+                else:
+                    if int(self.first_choice_money) > 0:
+                        return self.first_choice, int(self.first_choice_money)
+                    else:
+                        print("Но как ведь мы можем конвертировать меньше нуля? ╮（╯＿╰）╭")
 
     def currency_choice_second(self):
-       while True:
-           print("Выберите в какую валюту хотите конвертировать\n"
-                 "1. Доллары\n"
-                 "2. Евро\n"
-                 "3. Гривны\n"
-                 "4. Рубли\n")
-           self.second_choice = input("Ввод: ")
-           if self.first_choice != "1" or "2" or "3" or "4":
-               print("Нужно ввести в диапазоне 1 - 4. Выберите пожалуйста, в этом пределе.")
-           else:
-               return self.second_choice
+        """Метод для определения В какую валюту необходимо произвести конвертацию.
+                Доступно 4 варианта.
+                1. Доллары
+                2. Евро
+                3. Гривны
+                4. Рубли
+                Так же записывается в self.second_choice - вторая сумма конвертации"""
+        while True:
+            print("Выберите в какую валюту хотите конвертировать\n"
+                  "1. Доллары\n"
+                  "2. Евро\n"
+                  "3. Гривны\n"
+                  "4. Рубли\n")
+            self.second_choice = input("Ввод: ")
+            if self.second_choice not in ["1", "2", "3", "4"]:
+                print("Нужно ввести в диапазоне 1 - 4. Выберите пожалуйста, в этом пределе.")
+            else:
+                return self.second_choice
 
     def converter(self):
+        """Метод Конвертирует валюты на основе заранее определенных курсов обмена.
+        Примечание:
+        1. Курсы фиксированы и могут изменяться в реальном времени. Рекомендуется обновлять курсы перед использованием.
+        2. Метод конвертирует валюту на основе главных двух методов ↑↑↑"""
         dollar_in_euro = 0.91
         dollar_in_grivna = 41.27
         dollar_in_rub = 91.20
